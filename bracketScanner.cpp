@@ -7,7 +7,7 @@ bool isClosingBracket(char bracket);
 bool isBracketMatch(char openingBr, char closingBr);
 void detectNonMatchingBracket(const std::string &filePath);
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[]) {
   if (argc != 2) {
     std::cerr << "Usage: ./bracketScanner <file_path>" << std::endl;
     return 1;
@@ -75,6 +75,7 @@ void detectNonMatchingBracket(const std::string &filePath) {
           if(!isBracketMatch(top, currentChar)) {
             std::cerr << "Invalid Bracket" << currentChar << " found at " << filePath << ":" << lineNumber << ":" 
           << i + 1 << "." << std::endl;
+          std::cout << "stuck" << std::endl;
           return;
           }
           bracketStack.pop();
@@ -86,7 +87,7 @@ void detectNonMatchingBracket(const std::string &filePath) {
       int columnNumber = bracketStack.top().second;
       std::cerr << "Invalid Bracket" << remainingBracket << " found at " << filePath << ":" << lineNumber << ":" 
           << columnNumber << "." << std::endl;
-
+      bracketStack.pop();
     }
     lineNumber++;
   }
